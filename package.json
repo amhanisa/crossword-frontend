@@ -2,12 +2,12 @@
   "name": "crossword",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start-dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
-  "author": "dimas_saputra <dimas.maulanads@gmail.com>",
+  "author": "Azka Muhammad>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.3",
