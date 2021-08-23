@@ -36,22 +36,34 @@ body {
   display: none;
 }
 
-#app {
-}
-
 .crossword {
-  display: block;
+  display: inline-block;
 }
 
 .cwrow {
   display: flex;
   justify-content: center;
+  flex-direction: row;
 }
 
 .cwcell {
+  flex: 1;
   position: relative;
-  width: 40px;
-  height: 40px;
+  // height: 30px;
+  // width: 30px;
+
+  aspect-ratio: 1/1;
+
+  @supports not (aspect-ratio: auto) {
+    width: 30px;
+    height: 30px;
+
+    @media screen and (min-width: 600px) {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
   background-color: white;
   border: 1px solid black;
 }
@@ -63,9 +75,10 @@ body {
 .cwinput {
   width: 100%;
   height: 100%;
-  text-transform: capitalize;
+  text-transform: uppercase;
   text-align: center;
   font-weight: bold;
+  font-size: 1.6rem;
 }
 
 .clueNumber {
@@ -88,6 +101,34 @@ body {
   &:hover {
     background-color: indianred;
   }
+}
+
+.username-text {
+  width: 600px;
+  margin: 1rem auto;
+
+  #username {
+    font-weight: bolder;
+  }
+}
+
+.container {
+  padding: 0rem 1rem;
+  width: 100%;
+  @media screen and (min-width: 600px) {
+    padding: 0;
+    width: 500px;
+    margin: auto;
+  }
+  @media screen and (min-width: 1000px) {
+    padding: 0;
+    width: 600px;
+    margin: auto;
+  }
+}
+
+.username {
+  margin: 2rem auto;
 }
 
 .score-title {

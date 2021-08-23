@@ -9,6 +9,7 @@ class Crossword {
 
     const computedArray = this.create2DArray();
     this.renderCrossword(computedArray);
+    this.setupClue();
     console.log(computedArray);
   }
 
@@ -146,6 +147,24 @@ class Crossword {
     console.log(submitData);
 
     return submitData;
+  }
+
+  setupClue() {
+    let acrossClue = document.querySelector("#across-clue");
+    let index = 1;
+    this.crossword.acrossClues.forEach((clue) => {
+      const item = `
+        <p>${index++}.  ${clue.clue}</p>
+      `;
+      acrossClue.innerHTML += item;
+    });
+    let downClue = document.querySelector("#down-clue");
+    this.crossword.downClues.forEach((clue) => {
+      const item = `
+        <p>${index++}.  ${clue.clue}</p>
+      `;
+      downClue.innerHTML += item;
+    });
   }
 }
 

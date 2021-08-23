@@ -1,10 +1,11 @@
 import axios from "axios";
-import Crossword from "../../component/crossword";
+import Crossword from "../../components/crossword";
+import data from "../../data/data.json";
 
 const Home = {
   async render() {
     return `
-        <div class="modal" id="modal-username">
+        <div class="modal hide" id="modal-username">
             <div class="modal-body">
                 <label>Masukkan Nama Anda</label>
                 <input type="text" id="username-input">
@@ -12,18 +13,28 @@ const Home = {
                 <button class="submit-username">submit</button>
             </div>
         </div>
-        <div>
+        <div class="container username">
             <span>Username</span>
             <span id="username"></span>    
         </div>
-        <div class="crossword">
+
+        <div class="container">
+          <div class="crossword">
+        </div>
             
         </div>
 
-        <div>
+        <div class="container">
             <button id="submit-crossword">
             Submit
             </button>
+        </div>
+
+        <div class="container">
+          <h2>Pertanyaan Mendatar</h2>
+          <div id="across-clue"></div>
+          <h2>Pertanyaan Menurun</h2>
+          <div id="down-clue"></div>
         </div>
 
         <div class="modal hide" id="modal-submit">
@@ -42,20 +53,6 @@ const Home = {
     submitUsernameButton.addEventListener("click", () => {
       this.submitUsername();
     });
-
-    const data = {
-      height: 15,
-      width: 15,
-      acrossClues: [
-        { x: 2, y: 2, length: 4 },
-        { x: 5, y: 4, length: 4 },
-      ],
-      downClues: [
-        { x: 5, y: 2, length: 3 },
-        { x: 2, y: 2, length: 7 },
-        { x: 10, y: 4, length: 8 },
-      ],
-    };
 
     const crossword = new Crossword({
       crossword: data,

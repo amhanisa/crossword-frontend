@@ -102,12 +102,14 @@ const Score = {
       scoreboard.forEach((result) => {
         const endDate = new Date(result.time);
         const duration = (endDate.getTime() - startDate.getTime()) / 1000;
+        const minute = Math.floor(duration / 60);
+        const second = duration % 60;
         const row = `
           <tr class="row-score">
             <td>${index++}</td>
             <td class="truncate">${result.username}</td>
             <td>${result.score}</td>
-            <td>${duration} Detik</td>
+            <td>${minute} Menit ${second} Detik</td>
           </tr>
         `;
 
