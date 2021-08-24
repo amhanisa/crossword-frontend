@@ -1,16 +1,19 @@
-import axios from "axios";
-
 class Crossword {
   constructor({ crossword, container }) {
-    this.crossword = crossword;
     this.container = container;
 
-    console.log("crossword created");
+    if (crossword) {
+      this.setCrossword(crossword);
+    }
 
+    console.log("crossword created");
+  }
+
+  setCrossword(crossword) {
+    this.crossword = crossword;
     const computedArray = this.create2DArray();
     this.renderCrossword(computedArray);
     this.setupClue();
-    console.log(computedArray);
   }
 
   create2DArray() {

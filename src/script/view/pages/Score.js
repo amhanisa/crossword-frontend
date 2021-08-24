@@ -1,4 +1,5 @@
 import axios from "axios";
+import CONFIG from "../../data/config";
 
 const Score = {
   async render() {
@@ -19,11 +20,13 @@ const Score = {
           <span id="selected"></span>
         </div>
         <div class="time-setting">
-        <input type="date" id="date-selector" class="date">
-        <input type="time" id="time-selector" class="date">
-        <button id="set-time">Apply</button>
-        <p id="selected-time"></p>
-          
+          <input type="date" id="date-selector" class="date">
+          <input type="time" id="time-selector" class="date">
+          <button id="set-time">Apply</button>
+          <p id="selected-time"></p>        
+        </div>
+        <div>
+          <button id="clean-button">Clean Database</button>
         </div>
       </div>
           
@@ -58,6 +61,9 @@ const Score = {
     const refreshButton = document.querySelector("#refresh-now");
     refreshButton.addEventListener("click", () => this.getScore());
 
+    const cleanButton = document.querySelector("#clean-button");
+    cleanButton.addEventListener("click", () => this.cleanDatabase());
+
     const setRefreshRate = document.querySelector("#refresh-set");
     setRefreshRate.addEventListener("click", () => {
       const rate = document.querySelector("#refresh-rate").value;
@@ -85,7 +91,7 @@ const Score = {
   },
 
   async getScore() {
-    axios.get("http://localhost:3000/score").then((res) => {
+    axios.get(`${CONFIG.API_URL}/score`).then((res) => {
       console.log(res);
       const scoreboard = res.data;
       const table = document.querySelector("tbody");
@@ -99,23 +105,30 @@ const Score = {
 
       console.log(startDate);
 
-      scoreboard.forEach((result) => {
-        const endDate = new Date(result.time);
-        const duration = (endDate.getTime() - startDate.getTime()) / 1000;
-        const minute = Math.floor(duration / 60);
-        const second = duration % 60;
-        const row = `
-          <tr class="row-score">
-            <td>${index++}</td>
-            <td class="truncate">${result.username}</td>
-            <td>${result.score}</td>
-            <td>${minute} Menit ${second} Detik</td>
-          </tr>
-        `;
+      if (scoreboard.length > 0) {
+        scoreboard.forEach((result) => {
+          const endDate = new Date(result.time);
+          const duration = (endDate.getTime() - startDate.getTime()) / 1000;
+          const minute = Math.floor(duration / 60);
+          const second = duration % 60;
+          const row = `
+            <tr class="row-score">
+              <td>${index++}</td>
+              <td class="truncate">${result.username}</td>
+              <td>${result.score}</td>
+              <td>${minute} Menit ${second} Detik</td>
+            </tr>
+          `;
 
-        table.innerHTML += row;
-      });
+          table.innerHTML += row;
+        });
+      }
     });
+  },
+
+  async cleanDatabase() {
+    console.log("asd");
+    axios.post(`${CONFIG.API_URL}/cleanDatabase`);
   },
 };
 
