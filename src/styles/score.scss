@@ -1,0 +1,36 @@
+.score-title {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.scoreboard {
+  margin: auto;
+  border-spacing: 0;
+
+  td {
+    padding: 0.5rem 2rem;
+  }
+}
+
+thead {
+  td {
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+  }
+}
+
+.row-score {
+  font-size: 3rem;
+
+  .truncate {
+    max-width: 700px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.text-bold {
+  font-weight: bolder;
+}

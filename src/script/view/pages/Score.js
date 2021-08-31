@@ -5,7 +5,7 @@ const Score = {
   async render() {
     return `
 
-      <div class="">
+      <div class="setting">
         <div>
           <button id="refresh-now">Refresh Now</button>
           <select id="refresh-rate">
@@ -29,6 +29,7 @@ const Score = {
           <button id="clean-button">Clean Database</button>
         </div>
       </div>
+      <button id="toggle-setting">Toggle Setting</button>
           
       <h1 class="score-title">SCORE</h1>
 
@@ -57,6 +58,11 @@ const Score = {
 
   async afterRender() {
     let interval = null;
+
+    const settingButton = document.querySelector("#toggle-setting");
+    settingButton.addEventListener("click", () => {
+      document.querySelector(".setting").classList.toggle("hide");
+    });
 
     const refreshButton = document.querySelector("#refresh-now");
     refreshButton.addEventListener("click", () => this.getScore());
@@ -114,7 +120,7 @@ const Score = {
           const row = `
             <tr class="row-score">
               <td>${index++}</td>
-              <td class="truncate">${result.username}</td>
+              <td class="truncate text-bold">${result.username}</td>
               <td>${result.score}</td>
               <td>${minute} Menit ${second} Detik</td>
             </tr>
