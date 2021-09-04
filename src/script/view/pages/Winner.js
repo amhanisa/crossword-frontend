@@ -15,6 +15,9 @@ const Winner = {
               <input id="winner3">
               <input id="winner4">
               <input id="winner5">
+              <input id="winner6">
+              <input id="winner7">
+              <input id="winner8">
             </div>
             <div class="flex">
               <input id="score1">
@@ -22,6 +25,9 @@ const Winner = {
               <input id="score3">
               <input id="score4">
               <input id="score5">
+              <input id="score6">
+              <input id="score7">
+              <input id="score8">
             </div>
             <div class="flex">
               <input id="time1">
@@ -29,6 +35,9 @@ const Winner = {
               <input id="time3">
               <input id="time4">
               <input id="time5">
+              <input id="time6">
+              <input id="time7">
+              <input id="time8">
             </div>
             <button id="submit-winner">Submit Winner</button>
         </div>
@@ -43,7 +52,7 @@ const Winner = {
      
     <button id="toggle-setting">Toggle Setting</button>
         
-    <h1 class="score-title">WINNER</h1>
+    <h1 class="score-title">PEMENANG TTS</h1>
 
     <table class="scoreboard">
         <thead class="head-score">
@@ -52,13 +61,13 @@ const Winner = {
             No
             </td>
             <td>
-            Username
+            Nama
             </td>
             <td>
-            Score
+            Total Benar
             </td>
             <td>
-            Time
+            Waktu
             </td>
         </tr>
         </thead>  
@@ -87,7 +96,7 @@ const Winner = {
       );
 
       axios.get(`${CONFIG.API_URL}/winner`).then((res) => {
-        const data = res.data;
+        const data = res.data.users;
         const scoreList = document.querySelector("#score-list");
         console.log(data);
         scoreList.innerHTML = "";
@@ -104,6 +113,14 @@ const Winner = {
               </li>
           `;
         });
+
+        const count = res.data.count[0];
+
+        scoreList.innerHTML += `
+          <li>
+          ${data.length}  / ${count.count}
+          </li>
+        `;
       });
     });
 
@@ -112,7 +129,7 @@ const Winner = {
       const table = document.querySelector("tbody");
       table.innerHTML = "";
 
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 8; i++) {
         const username = document.querySelector(`#winner${i}`).value;
         const score = document.querySelector(`#score${i}`).value;
         const time = document.querySelector(`#time${i}`).value;
